@@ -1,0 +1,153 @@
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+          Collapsible Group Item #1
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in">
+      <div class="panel-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+          Collapsible Group Item #2
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse">
+      <div class="panel-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+          Collapsible Group Item #3
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse">
+      <div class="panel-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="introduction">
+    <p>
+    jQuery widget to solve the <a href="http://www.stucox.com/blog/you-cant-detect-a-touchscreen/">
+    greatest question
+    </a> plaguing humanity in the history of ever.
+    </p>
+    <p>
+    <h1>Was that your <i>mouse</i> or your <i>finger</i>?</h1>
+
+    </p>
+    <p>
+    Detecting touch capability in general has been raising issues all over the place.<br>
+    <a href="https://github.com/Modernizr/Modernizr/issues/548">https://github.com/Modernizr/Modernizr/issues/548</a><br>
+    So, if used at all, they must be used very carefully<br>
+    Make sure the site you're building is still relatively functional even if touch/mouse detection fails<br>
+    (Note: The issue of windows phones has not been addressed with this plugin... or any plugin/method I have found.)<br>
+    The first several tests aren't really definitive of anything.<br>
+    More for completeness than functionality<br><br>
+    If you decide to encorporate the widget in your project, use the optimized versions here:
+    </p>
+    <p>
+    <h2>The Algorithm:</h2>
+    <h3>The Failing Tests</h3>
+     <ul>
+         <li>
+             <strong>It checks the user agent.</strong>
+             This doesn't really tell you anything about a touch capable laptop, but if it flags ipad/iphone/blackberry/android then touch-only is a safe bet. Hide the mouseover events! Hide them all.<br>
+             However, touch-capable desktops exist, and user agents can be faked.
+             </li>
+          <li>
+             <i>This method, btw, is how HULU.com checks whether you're on a phone/tablet or a computer<br> So if you'd like to watch Hulu on your phone and don't want to pay for hulu plus, just change your browsers user agent to 'desktop.'</i>
+         </li>
+         <li>
+             <strong>It checks for touch capability.</strong>
+             On non-IE browsers, if touch is not detected, then it's a pretty safe bet that the user is using a mouse<br>
+             (On IE checking pointer types instead)<br>
+             However, mobile browsers have been known to throw false negatives, and Desktop browsers, false posatives.
+         </li>
+         <li>
+            <strong>It checks the height/width ratio for portrait mode</strong>
+            I'm totally lying to you right now, all it does is check if the media querie for protrait mode is flagged.
+            If it's in portrait mode, it's probably a tablet/phone.<br>
+            However, portrait mode proves nothing.<br>
+            When I turn my MS Surface sideways, I can still use the mouse.<br>
+            I can also be really into resizing things.<br>            
+            That being said, if its less then 800px wide, it's probably phone/tablet (non-HD).<br>            
+         </li>
+         <li>
+         <strong>Check if touch.events exist</strong>
+         The current modernizr solution for touch detection checks if the touch.events exist at all.<br>
+         If they do, then we have touch. If not, then no touch.<br>
+         However, <a href="http://gadgets.ndtv.com/laptops/features/ces-2014-hybrids-laptops-and-ultrabooks-roundup-469808"><u>mouse and touch aren't mutually exclusive!</u></a>
+
+         <br>
+         Ideally, the UI should respond to each appropriately, but never assume anything.
+         </li>
+         </ul>
+ 
+        <h3>The Proposed Solution</h3>
+             <ul>
+         <li>
+            <strong>It listens(continually) for touch.events, mouse.events, and MS IE pointer.events</strong>            
+            If a touch/(non-mouse type pointer)event is detected, enable touch functions and hide your hovers (and other mouse-only functions)<br>
+            If a mouse/(pointer.type == mouse) event is detected, do your mouse-only things<br>
+          </li>
+         <li>
+            <i>The draw back is that it must keep listening. 
+            <br> Not the most efficient thing in the world, but in case your user goes from mouse to touch then back to mouse, you're covered<br></i>
+         </li>
+         <li>
+         <i>
+            Since webkit/moz touch.events throw mouse events too, a function with a quick timeout blocks the capture of mouse.events immediately after touch.events are fired.
+          </i>
+         </li>
+        </ul>
+    </p>
+    
+    
+</div>
+
+
+<span class="fxn">The nav.userAgent Test</span>
+    <div class="stats_txt_frmtA" id="nav_userAgent"></div>
+     <span class="fxn">The Device Width Test</span>
+	<div class="stats_txt_frmtA" id="device_dimensions">
+       
+      The dimensions of your browser window <strong id="windims"></strong>
+       <span id="device_width_large_p"> 
+      indicate that you are in portrait mode, and are most likely on a touch capable device
+      </span>     		
+	  <span id="device_width_small"> 
+      are small enough to suggest that you are on a mobile and therefore touch capable device.
+      </span>
+      <span id="device_width_large"> suggest that you are on a laptop/desktop or mobile device in landscape mode, therefore it is quite impossible to guess whether you have a touch capable device or not.</span> 	  
+	</div>
+     <span class="fxn">The 'has touch' test</span>
+	<div class="stats_txt_frmtB">
+       
+		touch capable:<span id="touch_capable"></span>
+	</div>
+     <span class="fxn">The User Interaction Test</span>
+	<div class="stats_txt_frmtB">
+		using mouse: <span id="using_mouse">maybe...</span>
+		<br />
+		using touch: <span id="using_touch">dunno yet</span>
+</div>
