@@ -16,5 +16,5 @@ jQuery plugin: Testing whether user interaction occurs via mouse or touch.
      Not the most efficient thing in the world, but in case your user goes from mouse to touch then back to mouse, you're covered
      The event can/should be throttled
 
-###See the Demo page: http://jbee.github.io/touchIt
+###See the Demo page: http://jbeee.github.io/touchIt
 ###Test on codepen.io: http://codepen.io/jbeeio/pen/dpwkC
