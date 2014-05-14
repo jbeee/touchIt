@@ -1,0 +1,5 @@
+.sass-cache
+js/bootstrap
+js/bootstrap/*
+sass/screen.scss
+sass/print.scss

@@ -1,1 +1,159 @@
-"testTouch" 
+<head>
+  <link href="stylesheets/styles.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="stylesheets/print.css" media="print" rel="stylesheet" type="text/css" />
+  <!--[if IE]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <![endif]-->
+</head>
+
+<body>
+ <p>
+    jQuery widget to solve the <a href="http://www.stucox.com/blog/you-cant-detect-a-touchscreen/">
+    greatest question
+    </a> plaguing humanity in the history of ever.
+    </p>
+    <p>
+    <h1>Was that your <i>mouse</i> or your <i>finger</i>?</h1>
+
+    </p>
+    <p>
+<h2>The Results:</h2>
+<span class="fxn">The nav.userAgent Test</span>
+    <div class="stats_txt_frmtA" id="nav_userAgent"></div>
+     <span class="fxn">The Screen Dimensions Test</span>
+	<div class="stats_txt_frmtA" id="device_dimensions">
+       <span id="screenRatio"></span> 
+      window dimensions <strong id="windims"></strong>       
+       <span id="device_width_large_p"> 
+      indicate that you are in portrait mode, and are most likely on a touch capable device
+      </span>     		
+	  <span id="device_width_small"> 
+      are small enough to suggest that you are on a mobile and therefore touch capable device.
+      </span>
+      <span id="device_width_large"> suggest that you are on a laptop/desktop or mobile device in landscape mode. </span> 	  
+	<br><br>
+     <span class="fxn">The 'has touch' test</span>	
+       
+		touch capable:<span id="touch_capable"></span>
+	</div>
+     <span class="fxn">The User Interaction Test</span>
+	<div class="stats_txt_frmtB">
+		using mouse: <span id="using_mouse">maybe...</span>
+		<br />
+		using touch: <span id="using_touch">dunno yet</span>
+</div>
+
+<div class="introduction">
+    Detecting touch capability in general has been raising issues all over the place.<br>
+    <a href="https://github.com/Modernizr/Modernizr/issues/548">https://github.com/Modernizr/Modernizr/issues/548</a><br>
+    So, if used at all, they must be used very carefully<br>
+    Make sure the site you're building is still relatively functional even if touch/mouse detection fails<br>
+    (Note: The issue of windows phones has not been addressed with this plugin... or any plugin/method I have found.)<br>
+    The first several tests aren't really definitive of anything.<br>
+    More for completeness than functionality<br><br>
+    If you decide to encorporate the widget in your project, use the optimized versions here:
+    </p>
+    <p>
+
+    <h2>The Failing Tests:</h2>
+
+<div class="panel-group" id="accordion1">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion1" href="#collapseOne">
+         user agent test
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse">
+      <div class="panel-body">
+             This doesn't really tell you anything about a touch capable laptop, but if it flags ipad/iphone/blackberry/android then touch-only is a safe bet. Hide the mouseover events! Hide them all.<br>
+             However, touch-capable desktops exist, and user agents can be faked.<br><br>
+
+             <i>This method is how HULU.com checks whether you're on a phone/tablet or a computer<br> So if you'd like to watch Hulu on your phone and don't want to pay for hulu plus, just change your browsers useragent to 'desktop.'</i>
+
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion1" href="#collapseTwo">
+          has touch capability
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse">
+      <div class="panel-body">
+The current modernizr solution for touch detection checks if the touch.events exist at all by checking if <em>ontouchstart</em> exists<br><br>
+<strong> Why it fails</strong><br>
+Mobile browsers have been known to throw false negatives, and desktop browsers, false positives.<br> 
+Furthermore, in versions of IE where touch is supported, the pointer always exists but pointer type is not known till the event fires.<br>
+And, most importantly, in many modern devices <a href="http://gadgets.ndtv.com/laptops/features/ces-2014-hybrids-laptops-and-ultrabooks-roundup-469808"><u>mouse and touch aren't mutually exclusive!</u></a>
+          <br>
+          <br>
+          <i>
+         Ideally, the UI should respond to each appropriately, but never assume anything.
+         <br>
+         The site should still be reasonably functional if everything goes wrong.<br>
+         <a href="http://www.html5rocks.com/en/mobile/touchandmouse/">The HTML5 people concur</a>
+         </i>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion1" href="#collapseThree">
+          height/width ratio & portrait mode
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse">
+      <div class="panel-body">
+            Check media querie flag for protrait mode.<br>
+            or check if height > width.<br>
+            If the width is under 800px, the user is more than likely using a phone.<br>
+            If it's in portrait mode, it's probably a tablet/phone.<br>
+            However, it could be resized window on a touch capable device<br>
+            When I turn my MS Surface sideways, I can still use the mouse.<br>
+            <br><br>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+         <h2>The Proposed Solution:</h2>
+
+            <ul>
+         <li>
+            <strong>listens for touch.events, mouse.events, and MS IE pointer.events</strong>     <br>       
+            If a touch/(non-mouse type pointer)event is detected, enable touch functions and hide your hovers (and other mouse-only functions)<br>
+            If a mouse/(pointer.type == mouse) event is detected, do your mouse-only things<br>
+          </li>
+         <li>
+            <i>The draw back is that it must keep listening. 
+            <br> Not the most efficient thing in the world, but in case your user goes from mouse to touch then back to mouse, you're covered<br>
+            The event can/should be throttled</i>
+         </li>
+         <li>
+         <i>
+            Since webkit/moz touch.events throw mouse.events too, a function with a quick timeout blocks the capture of mouse.events immediately after touch.events are fired to prevent false mouse.event positive
+          </i>
+         </li>
+        </ul>
+    </p>
+    
+    
+</div>
+  <script type='text/javascript' src='http://code.jquery.com/jquery-1.9.1.js'></script>
+  <script type='text/javascript' src='js/scripts.js'></script>
+  <script>
+  ///go go io tester
+    $(window).ioTester({keepWatching:true, throttleWatch:false});
+  </script>
+
