@@ -6,7 +6,7 @@ images_dir = "images"
 javascripts_dir = "javascripts"
 
 
-output_style = :compressed #:expanded :nested :compact :compressed
+output_style = :expanded #:expanded :nested :compact :compressed
 
 
 # relative_assets = true
