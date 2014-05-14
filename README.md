@@ -1,4 +1,4 @@
-touchTests
+touchIt
 ==========
 
 jQuery plugin: Testing whether user interaction occurs via mouse or touch.
