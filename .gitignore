@@ -4,8 +4,6 @@ js/bootstrap
 js/bootstrap/*
 sass/screen.scss
 sass/print.scss
-README.md
-LICENSE
 _variables.scss
 ie.scss
 
