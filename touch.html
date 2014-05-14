@@ -236,27 +236,27 @@ Inside you will feel clean, clear, perfect, and still.
  
 jQuery(function($){
 
-$.fn.tTest = function(){
+$.fn.touchIt = function(){
 	var me = $(this); hastouch();
     function hastouch(){	
 	  if(window.navigator.msPointerEnabled){ pokeIE(); }	
 	  else if(('ontouchstart' in window)||(window.DocumentTouch && document instanceof DocumentTouch)){poke();}
-	  else{ $.fn.tTest.M();} }
+	  else{ $.fn.touchIt.M();} }
 	function poke(){ 
 		var wasTouch = false; 
 	   $(me).bind("mouseover",function(){
 		   wasTouch = false;  mouseOverFired = true;
-		   setTimeout(function(){ if(!wasTouch){$.fn.tTest.M();$(me).unbind('mouseover');}},1000); });
+		   setTimeout(function(){ if(!wasTouch){$.fn.touchIt.M();$(me).unbind('mouseover');}},1000); });
 	  $(me).bind("touchstart",function(){ wasTouch = true;  tScroll(); $(me).unbind('touchstart');});}
 	function pokeIE(){
 		$(me).css("-ms-touch-action", "none");$(me).bind("MSPointerDown",function (e)
 		{ieMorT(e.pointerType);});$(me).bind("MSPointerMove",function (e){ieMorT(e.pointerType);});
  	   		function ieMorT(eType){if((eType == 4)||(eType == 'MSPOINTER_TYPE_MOUSE'))
-	  		 {$.fn.tTest.M();$(me).unbind('MSPointerMove');}
-			 else{$.fn.tTest.msT();$(me).unbind('MSPointerDown');}}}}
+	  		 {$.fn.touchIt.M();$(me).unbind('MSPointerMove');}
+			 else{$.fn.touchIt.msT();$(me).unbind('MSPointerDown');}}}}
 
-$.fn.tTest.M = function(){console.log('mouse away');}
-$.fn.tTest.msT = function(){ tScrollMS();}
+$.fn.touchIt.M = function(){console.log('mouse away');}
+$.fn.touchIt.msT = function(){ tScrollMS();}
 
 
 var sMe = '#scrollMe';
@@ -313,7 +313,7 @@ function tScroll()
 
 
 ///go go io tester
-$(window).tTest();
+$(window).touchIt();
 
 
 });
