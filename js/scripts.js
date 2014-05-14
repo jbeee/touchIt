@@ -265,13 +265,13 @@ $.fn.ioTester = function(options)
  var uiBusy = false; var uiThrottle;
  $.fn.throttlePokes = function()
 	{
-	   if(rBusy){return;}
+	   if(uiBusy){return;}
 		else
 		{
 			clearTimeout(uiThrottle);
 			uiThrottle = undefined;
 			uiBusy = true;
-			uiThrottle = setTimeout(execResize,options.throttleWatch);
+			uiThrottle = setTimeout(watchEvent,options.throttleWatch);
 		}
 		
 		function execResize()
