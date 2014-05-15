@@ -20,41 +20,40 @@ If you decide to encorporate the widget in your project, remove them.
 
 ###The Failing Tests:
 ####user agent test
-This doesn't really tell you anything about a touch capable laptop, but if it flags ipad/iphone/blackberry/android then touch-only is a safe bet. Hide the mouseover events! Hide them all.
+Check what the browser thinks it is (or wants you to think it is)
 
-However, touch-capable desktops exist, and user agents can be faked.
-
-This method is how HULU.com checks whether you're on a phone/tablet or a computer
-So if you'd like to watch Hulu on your phone and don't want to pay for hulu plus, 
-just change your browsers useragent to 'desktop.'
+Why it fails:
+		This doesn't really tell you anything about a touch capable laptop, 
+		but if it flags ipad/iphone/blackberry/android then touch-only is a safe bet. 
+		Hide your hovers events! Hide them all.
+		
+		However, touch-capable desktops exist, and user agents can be faked.
+		
+		This method is how HULU.com checks whether you're on a phone/tablet or a computer
+		So if you'd like to watch Hulu on your phone and don't want to pay for hulu plus, 
+		just change your browsers useragent to 'desktop.'
 
 
 ####has touch capability
-The current modernizr solution for touch detection checks if the touch.events exist at all by checking if ontouchstart exists
+The current modernizr solution for touch detection checks if the touch.events
+exist at all by checking if ontouchstart exists
 
 Why it fails:
+		Mobile browsers have been known to throw false negatives, and desktop browsers, false positives. 
+		Furthermore, in versions of IE where touch is supported, 
+		the pointer always exists but pointer type is not known till the event fires.
+		And, most importantly, in many modern devices mouse and touch aren't mutually exclusive!
+		http://gadgets.ndtv.com/laptops/features/ces-2014-hybrids-laptops-and-ultrabooks-roundup-469808
 
-Mobile browsers have been known to throw false negatives, and desktop browsers, false positives. 
-
-Furthermore, in versions of IE where touch is supported, the pointer always exists but pointer type is not known till the event fires.
-
-
-And, most importantly, in many modern devices mouse and touch aren't mutually exclusive!
-
-http://gadgets.ndtv.com/laptops/features/ces-2014-hybrids-laptops-and-ultrabooks-roundup-469808
-
-
-
-Ideally, the UI should respond to each appropriately, but never assume anything.
-
-The site should still be reasonably functional if everything goes wrong.
-
-The HTML5 people concur: http://www.html5rocks.com/en/mobile/touchandmouse
+--Ideally, the UI should respond to each appropriately, but never assume anything.
+--The site should still be reasonably functional if everything goes wrong.
+--The HTML5 people concur: http://www.html5rocks.com/en/mobile/touchandmouse
 
 
 ####height/width ratio & portrait mode
-		Check media querie flag for protrait mode.
-		or check if height > width.
+Check media querie flag for protrait mode or check if height > width. 
+
+Why it fails:
 		If the width is under 800px, the user is more than likely using a phone.
 		If it's in portrait mode, it's probably a tablet/phone.
 		However, it could be resized window on a touch capable device
