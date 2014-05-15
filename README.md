@@ -13,7 +13,6 @@ Make sure the site you're building is still relatively functional even if touch/
 
 (Note: The issue of windows phones has not been addressed with this plugin... or any plugin/method I have found.)
 
-
 The first several tests (The Failing Tests) aren't definitive of anything.
 They are included for completeness not functionality
 If you decide to encorporate the widget in your project, remove them.
@@ -23,6 +22,7 @@ If you decide to encorporate the widget in your project, remove them.
 Check what the browser thinks it is (or wants you to think it is)
 
 Why it fails:
+
 		This doesn't really tell you anything about a touch capable laptop, 
 		but if it flags ipad/iphone/blackberry/android then touch-only is a safe bet. 
 		Hide your hovers events! Hide them all.
@@ -39,6 +39,7 @@ The current modernizr solution for touch detection checks if the touch.events
 exist at all by checking if ontouchstart exists
 
 Why it fails:
+
 		Mobile browsers have been known to throw false negatives, and desktop browsers, false positives. 
 		Furthermore, in versions of IE where touch is supported, 
 		the pointer always exists but pointer type is not known till the event fires.
@@ -54,6 +55,7 @@ Why it fails:
 Check media querie flag for protrait mode or check if height > width. 
 
 Why it fails:
+
 		If the width is under 800px, the user is more than likely using a phone.
 		If it's in portrait mode, it's probably a tablet/phone.
 		However, it could be resized window on a touch capable device
