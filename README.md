@@ -2,19 +2,19 @@
 #touchIt.js   
 ******************************
 Testing whether user interaction occurs via mouse or touch.
-https://github.com/jbeee/touchIt
 
 Based on Stu Cox's 'Poke IT' method
+
 This widget was an attempt to solve the biggest problem plaguing humanity in the history of ever: 
 **Was that a mouse or a finger?**
 Detecting touch capability in general has been raising issues all over the place.
 - http://www.stucox.com/blog/you-cant-detect-a-touchscreen
 - https://github.com/Modernizr/Modernizr/issues/54
 
-So, if used at all, they must be used very carefully. Sites should still relatively functional even if touch/mouse detection fails
+So, if used at all, they must be used very carefully. Sites should still relatively functional even if touch/mouse detection fails*
  - *The issue of windows phones has not been addressed with this widget... or any plugin/method I have found.*
- - *Touch events are NOT supported by Firefox(from v. 24) or Safari(ever)
- - *This has limited testing on iOS devices
+ - *Touch events are NOT supported by Firefox(from v. 24) or Safari(ever)*
+ - *This has limited testing on iOS devices*
 
 The first several tests (the failing tests) aren't definitive of anything.
 They are included for completeness not functionality.
