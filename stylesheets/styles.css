@@ -8053,7 +8053,7 @@ i {
     display: none;
   }
 }
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 800px) {
   /* line 80, ../sass/styles.scss */
   #device_width_small {
     display: block;

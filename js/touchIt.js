@@ -10,7 +10,7 @@ To actually use this in a page, go through and delete all extra functions and re
 
 */
 
-$.fn.ioTester = function(options)
+$.fn.touchIt = function(options)
 {
   options = $.extend({keepWatching: true, throttleWatch: false }, options);
   var me = this;
@@ -202,7 +202,7 @@ $.fn.ioTester = function(options)
 		   mouseOverFired = true;		 
 		  setTimeout(function(){ 
 			  if(!wasTouch){
-				  $.fn.ioTester.usingMouse();
+				  $.fn.touchIt.usingMouse();
 						   }
 						   },1000);
 		if(!options.keepWatching) // STOP CHECKING FOR A MOUSE/TOUCH SWITCH 
@@ -214,7 +214,7 @@ $.fn.ioTester = function(options)
 	  ////Add the touch event listener
 	  $(me).bind("touchstart",function(){
 		  wasTouch = true; 
-		  $.fn.ioTester.usingTouch();
+		  $.fn.touchIt.usingTouch();
 		  if(!options.keepWatching) ///STOP CHECKING FOR A MOUSE/TOUCH SWITCH
 			{
 		 		 $(me).unbind('touchstart'); 
@@ -252,12 +252,12 @@ $.fn.ioTester = function(options)
 		{
 			if((eType == 4)||(eType == 'MSPOINTER_TYPE_MOUSE'))
 			{
-				$.fn.ioTester.usingMouse()
+				$.fn.touchIt.usingMouse()
 			}
 			else
 			{
 				$('#touch_capable').html('true').addClass('true').removeClass('false'); 
-				$.fn.ioTester.usingTouch();
+				$.fn.touchIt.usingTouch();
 			}
 		}
 	 }
@@ -287,14 +287,14 @@ $.fn.ioTester = function(options)
 
 
 ///////start doing mouse-driven stuffs
-$.fn.ioTester.usingMouse = function()
+$.fn.touchIt.usingMouse = function()
 {	
 	$('#using_mouse').html('true').addClass('true').removeClass('false');	$('#using_touch').html('false').addClass('false').removeClass('true');
 	console.log('thats a mouse!');
 }
 
 ///////start doing touch-driven stuffs
-$.fn.ioTester.usingTouch = function()
+$.fn.touchIt.usingTouch = function()
 {	$('#using_touch').html('true').addClass('true').removeClass('false');	$('#using_mouse').html('false').addClass('false').removeClass('true');
 console.log('you touched it');
 }
