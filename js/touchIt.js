@@ -10,16 +10,18 @@ To actually use this in a page, go through and delete all extra functions and re
 
 */
 
+
 $.fn.touchIt = function(options)
 {
   options = $.extend({keepWatching: true, throttleWatch: false }, options);
   var me = this;
-  var IE10plus = false;
+  var IE10plus = window.navigator.msPointerEnabled; /// true for both ie 10 & 11
+
   the_device_width_test();
   the_userAgent_test();
   the_hastouch_test();
 
-  	  if(window.navigator.msPointerEnabled)
+  	  if(window.navigator.msPointerEnabled) 
 	  {
 		  the_pokeme_test_IE10();
 	  }	
@@ -114,7 +116,15 @@ $.fn.touchIt = function(options)
 		// In MSIE, the true version is after "MSIE" in userAgent
 		else if ((verOffset=nAgt.indexOf("MSIE"))!=-1) {
 		 browserName = "Microsoft Internet Explorer";
-		 fullVersion = nAgt.substring(verOffset+5);
+		 fullVersion = nAgt.substring(verOffset+5);	 
+		 
+		}
+		// In MSIE, the true version is after "MSIE" in userAgent
+		else if ((verOffset=nAgt.indexOf("Trident/"))!=-1){
+		 browserName = "Microsoft Internet Explorer";
+		 var rv = nAgt.indexOf('rv:');
+        fullVersion=nAgt.substring(rv + 3, nAgt.indexOf('.', rv));
+		 
 		}
 		// In Chrome, the true version is after "Chrome" 
 		else if ((verOffset=nAgt.indexOf("Chrome"))!=-1) {
@@ -172,15 +182,15 @@ $.fn.touchIt = function(options)
   {	
   	if(IE10plus)
   	{
-  		$('#touch_capable').html('maybe...? IE10+').addClass('true').removeClass('false');
+  		$('#touch_capable').html(' maybe...? IE10+').addClass('true').removeClass('false');
   	}
 	 else if(('ontouchstart' in window)||(window.DocumentTouch && document instanceof DocumentTouch))
 	  {
-		$('#touch_capable').html('true').addClass('true').removeClass('false');
+		$('#touch_capable').html(' true').addClass('true').removeClass('false');
 	  }
 	  else
 	  { 
-		 $('#touch_capable').html('false').addClass('false').removeClass('true'); 
+		 $('#touch_capable').html(' false').addClass('false').removeClass('true'); 
 	  }			
   }
   
@@ -229,28 +239,26 @@ $.fn.touchIt = function(options)
 	{
 		$(me).css("-ms-touch-action", "none");
 		////for 'touch event occurs first' scenario
-		$(me).bind("MSPointerDown",function (e)
-		{
-			ieMorT(e.pointerType);
-			if(!options.keepWatching) // STOP CHECKING FOR A MOUSE/TOUCH SWITCH (IE)?
-			{
-				$(me).unbind('MSPointerDown'); 
-			}
-		});
-	
-		////for 'mousemove occurs first' scenarios
-		$(me).bind("MSPointerMove",function (e)
-		{
-			ieMorT(e.pointerType);
-			if(!options.keepWatching) // STOP CHECKING FOR A MOUSE/TOUCH SWITCH (IE)?
-			{
-				 $(me).unbind('MSPointerMove');  
-			}
-		});
+		
+		///you're more likely to move your mouse before you click on something
+		var bindEventMouse = (window.navigator.pointerEnabled)?'pointermove':'MSPointerMove'; ///only true for ie 11
 
- 	   function ieMorT(eType)
+		$(me).bind(bindEventMouse,function (e){
+		var pEvent = e.originalEvent || e;
+		console.log(e.pointerType);ieMorT(pEvent,bindEventMouse);});
+			
+		///you're more likely to touch-down on something first before you move it. Tricky Tricky IE.		
+		var bindEventTouch = (window.navigator.pointerEnabled)?'pointerdown':'MSPointerDown';		
+		$(me).bind(bindEventTouch,function (e){var pEvent = e.originalEvent || e;ieMorT(pEvent,bindEventTouch);});
+						
+ 	   function ieMorT(eType,bindEvent)
 		{
-			if((eType == 4)||(eType == 'MSPOINTER_TYPE_MOUSE'))
+			console.log(eType);
+			if(!options.keepWatching) // STOP CHECKING FOR A MOUSE/TOUCH SWITCH (IE)?
+			{				
+				$(me).unbind(bindEvent); 
+			}
+			if((eType == 4)||(eType == 'MSPOINTER_TYPE_MOUSE')||('mouse'))
 			{
 				$.fn.touchIt.usingMouse()
 			}
@@ -261,8 +269,12 @@ $.fn.touchIt = function(options)
 			}
 		}
 	 }
+	 
+	$(window).resize(function(){the_device_width_test();});
 
- var uiBusy = false; var uiThrottle;
+/*
+	This hasn't been implemented yet, but ideally, a throttle or a debounce for the events will happen... soon
+ var uiBusy = false; var uiThrottle;    
  $.fn.throttlePokes = function()
 	{
 	   if(uiBusy){return;}
@@ -282,9 +294,10 @@ $.fn.touchIt = function(options)
 			uiThrottle = undefined;
 		}	
 	} 
+*/
+
 
 }
-
 
 ///////start doing mouse-driven stuffs
 $.fn.touchIt.usingMouse = function()
