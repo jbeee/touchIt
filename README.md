@@ -22,8 +22,9 @@ If you decide to incorporate the widget, or the logic in your project, remove th
 ####user agent test
 Check what the browser thinks it is (or wants you to think it is)
 
-**Why it fails:**
-   This doesn't really tell you anything about a touch capable laptop, 
+*Why it fails:*
+
+This doesn't really tell you anything about a touch capable laptop, 
 but if it flags ipad/iphone/blackberry/android then touch-only is a safe bet. Hide your hovers events! Hide them all.	
 	
 However, touch-capable desktops exist, and userAgent can be faked.
@@ -37,6 +38,7 @@ The current modernizr solution for touch detection checks if touch.events
 exist at all by checking if ontouchstart exists
 
 *Why it fails:*
+
 Mobile browsers have been known to throw false negatives, and desktop browsers, false positives. Furthermore, in versions of IE where touch is supported, the pointer always exists but pointer type is not known till the event fires: https://coderwall.com/p/mfreca
 
 And, most importantly, in many modern devices mouse and touch aren't mutually exclusive! http://gadgets.ndtv.com/laptops/features/ces-2014-hybrids-laptops-and-ultrabooks-roundup-469808
