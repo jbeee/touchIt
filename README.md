@@ -4,15 +4,17 @@
 Testing whether user interaction occurs via mouse or touch.
 https://github.com/jbeee/touchIt
 
+Based on Stu Cox's 'Poke IT' method
 This widget was an attempt to solve the biggest problem plaguing humanity in the history of ever: 
 **Was that a mouse or a finger?**
 Detecting touch capability in general has been raising issues all over the place.
 - http://www.stucox.com/blog/you-cant-detect-a-touchscreen
 - https://github.com/Modernizr/Modernizr/issues/54
- 
-So, if used at all, they must be used very carefully. Sites should still relatively functional even if touch/mouse detection fails
 
-(Note: The issue of windows phones has not been addressed with this widget... or any plugin/method I have found. This has also never been tested on an iOS device)
+So, if used at all, they must be used very carefully. Sites should still relatively functional even if touch/mouse detection fails
+ - *The issue of windows phones has not been addressed with this widget... or any plugin/method I have found.*
+ - *Touch events are NOT supported by Firefox(from v. 24) or Safari(ever)
+ - *This has limited testing on iOS devices
 
 The first several tests (the failing tests) aren't definitive of anything.
 They are included for completeness not functionality.
@@ -73,6 +75,8 @@ from mouse to touch then back to mouse, you're covered
 		
 The event can/should be throttled or maybe even debounced though (options.throttleWatch)
 I just haven't implemented that part yet. If anyone wants to help...
+
+
 
 ###See the Demo page: http://jbeee.github.io/touchIt
 ###Test on codepen.io: http://codepen.io/jbeeio/pen/dpwkC
