@@ -16,20 +16,15 @@ $.fn.touchIt = function(options)
   options = $.extend({keepWatching: true, throttleWatch: false }, options);
   var me = this;
   var IE10plus = window.navigator.msPointerEnabled; /// true for both ie 10 & 11
-
-  the_device_width_test();
-  the_userAgent_test();
-  the_hastouch_test();
-
-  	  if(window.navigator.msPointerEnabled) 
-	  {
-		  the_pokeme_test_IE10();
-	  }	
-	  else
-	  {
-	  	the_pokeme_test();
-	  }
+  the_device_width_test();   ///// failing test function
+  the_userAgent_test();  //// failing test function
+  the_hastouch_test(); ////failing test function
+  if(IE10plus){the_pokeme_test_IE10();}else{the_pokeme_test();}
   
+
+
+
+
   /*
   touchit tests: screen dimensions?
   If the device is less than 800px wide, its probably a mobile and therefore touch-only device.
@@ -193,9 +188,13 @@ $.fn.touchIt = function(options)
 		 $('#touch_capable').html(' false').addClass('false').removeClass('true'); 
 	  }			
   }
+
+
+
+
   
   /* 
-  touchit tests: poke me?
+  touchit tests: poke me? 
   Modification of the 'poke it method' from http://j.mp/18k2lx1
   1. listen for mouseover event fired. 
   2. listen for touchevent. On some browsers touch events fire mouse events too, so a test with a one second delay is set up to check if a chained touch-event occurs. 
